@@ -1,17 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Biblia Strong Plus</title>
+    <title>Biblia Strong Pro - RVR1960</title>
     <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="manifest.json">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body, html, #root {
             height: 100%;
@@ -19,32 +17,113 @@
             padding: 0;
             background-color: #000000;
             overflow: hidden;
+            color: #ffffff;
         }
         body {
-            font-family: 'Inter', sans-serif;
-            color: #e5e7eb;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
-        .bible-text {
-            font-family: 'Crimson Pro', serif;
-        }
         .gold-gradient {
-            background: linear-gradient(135deg, #d4af37 0%, #f9e29c 50%, #b8860b 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #f7ef8a 50%, #d4af37 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        .bible-text {
+            line-height: 1.8;
+            font-size: 1.15rem;
+            letter-spacing: -0.01em;
+            color: #ffffff;
+            font-weight: 400;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .verse-item {
+            margin-bottom: 28px;
+            position: relative;
+            background: transparent;
+            border: none;
+            padding: 0;
+            display: block;
+        }
+        .verse-number {
+            color: #555;
+            font-weight: 700;
+            font-size: 0.8rem;
+            margin-right: 0.9rem;
+            vertical-align: baseline;
+            user-select: none;
+        }
+        .strong-word {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.15s ease-out;
+            font-weight: inherit;
+        }
+        @media (hover: hover) {
+            .strong-word:hover {
+                color: #4a90e2;
+            }
+        }
+        .strong-word.active {
+            color: #4a90e2;
+        }
+        .side-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 90%;
+            max-width: 480px;
+            height: 100vh;
+            background: #121212;
+            box-shadow: -20px 0 60px rgba(0,0,0,1);
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1000;
+            border-left: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .side-panel.open {
+            right: 0;
+        }
+        .backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            z-index: 999;
+        }
+        .backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 3rem 2rem;
         }
     </style>
 <script type="importmap">
 {
   "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
     "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
     "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2",
-    "vite": "https://esm.sh/vite@^7.3.0",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
+    "vite": "https://esm.sh/vite@^7.3.0"
   }
 }
 </script>

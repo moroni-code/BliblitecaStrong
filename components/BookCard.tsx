@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Book, Testament } from '../types';
 
@@ -10,17 +9,25 @@ interface BookCardProps {
 export const TestamentCard: React.FC<{ title: string; onClick: () => void }> = ({ title, onClick }) => (
   <div 
     onClick={onClick}
-    className="aspect-[3/4] rounded-2xl p-6 flex flex-col items-center justify-start cursor-pointer transition-all active:scale-95 group relative overflow-hidden"
+    className="aspect-[3/4] rounded-3xl p-6 flex flex-col items-center justify-start pt-8 cursor-pointer transition-all active:scale-95 group relative overflow-hidden border border-white/5 shadow-2xl"
     style={{ background: 'linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%)' }}
   >
-    <div className="absolute top-0 left-0 w-full h-1 bg-white/5 group-hover:bg-blue-500/30 transition-colors" />
-    <div className="border-t border-b border-[#d4af37]/30 py-4 px-2 mb-4 w-full text-center">
-      <h3 className="text-[#d4af37] text-xl font-bold uppercase tracking-widest leading-tight">
-        {title.split(' ')[0]}<br/>{title.split(' ')[1]}
+    {/* Barra decorativa superior */}
+    <div className="absolute top-0 left-0 w-full h-1 bg-[#d4af37]/30 group-hover:h-1.5 group-hover:bg-[#d4af37]/60 transition-all" />
+    
+    {/* Contenedor de texto centrado horizontalmente pero en la parte superior */}
+    <div className="border-y border-[#d4af37]/20 py-6 px-2 w-full text-center flex flex-col items-center justify-center gap-1">
+      <h3 className="text-[#d4af37] text-lg font-black uppercase tracking-[0.2em] leading-tight">
+        {title.split(' ')[0]}
+      </h3>
+      <h3 className="text-[#d4af37] text-lg font-black uppercase tracking-[0.2em] leading-tight opacity-70">
+        {title.split(' ')[1]}
       </h3>
     </div>
-    <div className="mt-auto text-gray-500 text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-      Explorar libros
+
+    {/* Indicador inferior sutil */}
+    <div className="absolute bottom-8 text-[#d4af37]/30 text-[8px] font-black uppercase tracking-[0.4em] opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0">
+      Abrir Canon
     </div>
   </div>
 );
@@ -28,11 +35,11 @@ export const TestamentCard: React.FC<{ title: string; onClick: () => void }> = (
 export const BookCard: React.FC<BookCardProps> = ({ book, onClick }) => (
   <div 
     onClick={onClick}
-    className="bg-[#1a1a1a] rounded-xl p-4 flex flex-col gap-2 cursor-pointer border border-white/5 active:bg-white/5 transition-colors group"
+    className="bg-[#1a1a1a] rounded-2xl p-4 flex flex-col gap-3 cursor-pointer border border-white/5 active:bg-white/10 transition-all hover:border-[#d4af37]/30 group"
   >
-    <div className="w-full aspect-square bg-[#121212] rounded-lg mb-2 flex items-center justify-center group-hover:scale-105 transition-transform">
-      <span className="text-gray-700 text-2xl font-serif">{book.name[0]}</span>
+    <div className="w-full aspect-square bg-gradient-to-br from-[#121212] to-[#0a0a0a] rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform border border-white/5">
+      <span className="text-[#d4af37]/40 text-3xl font-serif italic select-none">{book.name[0]}</span>
     </div>
-    <span className="text-gray-200 text-sm font-medium truncate">{book.name}</span>
+    <span className="text-gray-300 text-[10px] font-bold truncate text-center uppercase tracking-wider">{book.name}</span>
   </div>
 );
